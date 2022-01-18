@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
   /// 如果用MaterialPageRoute的话同理
 
   Map<String, FlutterBoostRouteFactory> routerMap = {
-    '/': (RouteSettings settings, String? uniqueId) {
+    'mainPage': (RouteSettings settings, String? uniqueId) {
       return CupertinoPageRoute(
           settings: settings,
           builder: (_) {
@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
     },
   };
 
-  Route<dynamic>? routeFactory(RouteSettings settings, String ? uniqueId) {
+  Route<dynamic>? routeFactory(RouteSettings settings, String? uniqueId) {
     FlutterBoostRouteFactory? func = routerMap[settings.name];
     if (func == null) {
       return null;
@@ -97,13 +97,13 @@ class MainPage extends StatelessWidget {
 class SimplePage extends StatelessWidget {
   const SimplePage({dynamic data});
 
-  static void _incrementCounter() {
-    print("object");
+   void _incrementCounter() {
+    BoostNavigator.instance.push("targetPage").then((value) => {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: Center(child: Text('SimplePage')),
         floatingActionButton: FloatingActionButton(
           onPressed: _incrementCounter,
