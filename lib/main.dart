@@ -30,11 +30,11 @@ class _MyAppState extends State<MyApp> {
   /// 如果用MaterialPageRoute的话同理
 
   Map<String, FlutterBoostRouteFactory> routerMap = {
-    '/': (RouteSettings settings, String uniqueId) {
+    '/': (RouteSettings settings, String? uniqueId) {
       return CupertinoPageRoute(
           settings: settings,
           builder: (_) {
-            Map<String, Object> map = settings.arguments ?? {};
+            var map = (settings.arguments ?? {}) as Map<dynamic, dynamic>;
             var data = map['data'] ?? "";
             return MainPage(
               data: data,
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       return CupertinoPageRoute(
           settings: settings,
           builder: (_) {
-            var map = settings.arguments as Map<String, Object> ?? {};
+            var map = (settings.arguments ?? {}) as Map<dynamic, dynamic>;
             var data = map['data'] ?? "";
             return SimplePage(
               data: data,
@@ -54,8 +54,8 @@ class _MyAppState extends State<MyApp> {
     },
   };
 
-  Route<dynamic> routeFactory(RouteSettings settings, String uniqueId) {
-    FlutterBoostRouteFactory func = routerMap[settings.name];
+  Route<dynamic>? routeFactory(RouteSettings settings, String ? uniqueId) {
+    FlutterBoostRouteFactory? func = routerMap[settings.name];
     if (func == null) {
       return null;
     }

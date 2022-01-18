@@ -66,8 +66,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v3.0-preview.18"
-      resolved-ref: e19bf36cb451e2790edb65d353a643dbd472f8fa
+      ref: "v3.0-null-safety-preview.18"
+      resolved-ref: c4e5ed7c0471fe11b202b5df70b6ee6fe28369ed
       url: "https://github.com/alibaba/flutter_boost.git"
     source: git
     version: "3.0.0"
