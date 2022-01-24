@@ -1,4 +1,5 @@
 import 'package:boost_getx/pages.dart';
+import 'package:boost_getx/utils/Log.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
@@ -100,6 +101,7 @@ class MainPage extends StatelessWidget {
   const MainPage({dynamic data});
 
   void _press() {
+    Log.d("jump to simple page");
     // BoostNavigator.instance.push("simplePage");
     Get.toNamed("/simplePage");
     // Get.to(SimplePage());
@@ -123,6 +125,7 @@ class SimplePage extends StatelessWidget {
   const SimplePage({dynamic data});
 
   void _incrementCounter() {
+    Log.d("jump to main page");
     // BoostNavigator.instance.push("mainPage");
     Get.toNamed("/mainPage");
     // Get.to(MainPage());
