@@ -18,6 +18,5 @@ class LaunchActivity : AppCompatActivity() {
             .requestCode(1111)
             .build()
         FlutterBoost.instance().open(options)
-        finish()
     }
 }

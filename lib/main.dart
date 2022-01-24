@@ -1,12 +1,20 @@
-import 'dart:io';
-
+import 'package:boost_getx/pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 
+import 'package:get/get.dart';
+
+import 'controller.dart';
+
 void main() {
   CustomFlutterBinding();
-  runApp(MyApp());
+  runApp(GetMaterialApp(
+    home: MyApp(),
+    getPages: RouteGet.getPages,
+    darkTheme: ThemeData.dark(),
+  ));
+  // runApp(MyApp());
 }
 
 class CustomFlutterBinding extends WidgetsFlutterBinding
@@ -63,6 +71,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget appBuilder(Widget home) {
+    // home = GetMaterialApp(
+    //   home: MainPage(),
+    //   getPages: RouteGet.getPages
+    // );
     return MaterialApp(
       home: home,
       debugShowCheckedModeBanner: true,
@@ -86,10 +98,23 @@ class _MyAppState extends State<MyApp> {
 
 class MainPage extends StatelessWidget {
   const MainPage({dynamic data});
+
+  void _press() {
+    // BoostNavigator.instance.push("simplePage");
+    Get.toNamed("/simplePage");
+    // Get.to(SimplePage());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(child: Text('Main Page')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _press,
+        tooltip: "Increment",
+        child: Icon(Icons.share),
+      ),
     );
   }
 }
@@ -97,18 +122,24 @@ class MainPage extends StatelessWidget {
 class SimplePage extends StatelessWidget {
   const SimplePage({dynamic data});
 
-   void _incrementCounter() {
-    BoostNavigator.instance.push("targetPage").then((value) => {});
+  void _incrementCounter() {
+    // BoostNavigator.instance.push("mainPage");
+    Get.toNamed("/mainPage");
+    // Get.to(MainPage());
   }
 
   @override
   Widget build(BuildContext context) {
+    var c = Get.put(Controller());
     return Scaffold(
-        body: Center(child: Text('SimplePage')),
-        floatingActionButton: FloatingActionButton(
+      body: Center(child: Obx(() => Text('SimplePage${c.count}'))),
+      floatingActionButton: FloatingActionButton(
           onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
-        ));
+          tooltip: "Increment",
+          child: Icon(Icons.add)),
+      bottomSheet: BackButton(
+        onPressed: () => Get.toNamed("/main"),
+      ),
+    );
   }
 }
